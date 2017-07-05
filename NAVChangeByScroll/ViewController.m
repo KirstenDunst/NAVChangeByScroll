@@ -66,19 +66,22 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     NSLog(@">>>>>>>>>>>>%f",scrollView.contentOffset.y);
 //    修改清晰度和导航头一起展示做到替换渐进的效果，可以后期再添加自己的一个界限，超过范围的话改变偏移处理（这样就可以达到支付宝类似的导航头的处理方法）
-    if (fabs(scrollView.contentOffset.y)<=64) {
-         self.navigationItem.titleView.alpha = fabs(scrollView.contentOffset.y/64);
-    }else{
-        self.navigationItem.titleView.alpha = 1;
-    }
+//    if (fabs(scrollView.contentOffset.y)<=64.0) {
+//         self.navigationItem.titleView.alpha = fabs(scrollView.contentOffset.y/64.0);
+//        
+//    }else{
+//        self.navigationItem.titleView.alpha = 1;
+//    }
    
-//    更换导航界面视图头
+    //    更换导航界面视图头
     if (scrollView.contentOffset.y>0) {
         self.navigationItem.titleView = topView2;
+        self.navigationItem.titleView.alpha = fabs(scrollView.contentOffset.y/64.0);
     }else{
         self.navigationItem.titleView = topView1;
-
+        self.navigationItem.titleView.alpha = fabs(scrollView.contentOffset.y/64.0);
     }
+
     
 //    修改导航条背景颜色渐变
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:127/255.0 green:((int)fabs(scrollView.contentOffset.y)%255)/(255.0) blue:((int)fabs(scrollView.contentOffset.y)%255)/(255.0) alpha:1];
